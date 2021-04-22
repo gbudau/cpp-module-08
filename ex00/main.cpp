@@ -1,17 +1,32 @@
 #include <iostream>
 #include <vector>
 #include <list>
-#include <exception>
+#include <iterator>
 #include "easyfind.hpp"
 
-int	main() {
-	std::vector<int> v = { 7, 5, 16, 8, 0};
+template <typename T>
+void	print_value(
+		T const & container, typename T::const_iterator const & i) {
+	if (i != container.end()) {
+		std::cout << "Value found: " << *i << "\n";
+	} else {
+		std::cout << "Value not found\n";
+	}
+}
 
-	try {
-		int i = easyfind(v, 9);
-		std::cout << i << "\n";
+template <typename T>
+void	test_easyfind(T & container) {
+	for (int i = 0; i < 10; i++) {
+		container.push_back(i);
 	}
-	catch (std::exception & e) {
-		std::cout << e.what() << "\n";
-	}
+	print_value(container, easyfind(container, 5));
+	print_value(container, easyfind(container, 42));
+}
+
+int	main() {
+	std::vector<int> v;
+	test_easyfind(v);
+
+	std::list<int> l;
+	test_easyfind(l);
 }

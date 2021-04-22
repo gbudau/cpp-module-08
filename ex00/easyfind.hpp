@@ -1,16 +1,10 @@
 #ifndef EASYFIND_HPP_
 #include <algorithm>
 #include <iterator>
-#include <stdexcept>
 
-template <template <typename ...> class T>
-int	easyfind(T<int> const & container, int value) {
-	typename T<int>::const_iterator it =
-						std::find(container.begin(), container.end(), value);
-	if (it == container.end()) {
-		throw std::invalid_argument("Value not found");
-	}
-	return *it;
+template <typename T>
+typename T::const_iterator	easyfind(T const & container, int value) {
+	return std::find(container.begin(), container.end(), value);
 }
 
 #endif  // EASYFIND_HPP_
