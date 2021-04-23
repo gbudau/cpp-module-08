@@ -1,4 +1,5 @@
 #ifndef EASYFIND_HPP_
+#define EASYFIND_HPP_
 #include <algorithm>
 #include <iterator>
 
