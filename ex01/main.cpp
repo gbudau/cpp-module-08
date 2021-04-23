@@ -1,5 +1,6 @@
 #include <iostream>
 #include <limits>
+#include <list>
 #include "span.hpp"
 
 void	test_from_subject() {
@@ -119,7 +120,66 @@ void	test_add_combined() {
 	std::cout << "longestSpan() = " << sp.longestSpan() << "\n";
 }
 
-void	test_addRange_invalid() {
+void	test_addNumber_limit() {
+	const int	span_size = 5;
+	Span		sp = Span(span_size);
+
+	try {
+		std::cout << "\n##### Test limit with Span size " << span_size << "\n";
+		for (int i = 0; i < span_size; i++) {
+			sp.addNumber(i);
+			std::cout << i;
+			if (i < span_size - 1) {
+				std::cout << ", ";
+			}
+		}
+		std::cout << "\nAdd 42\n";
+		sp.addNumber(42);
+	}
+	catch (const std::exception & e) {
+		std::cout << "An exception ocurred: " << e.what() << "\n";
+	}
+}
+
+void	test_addNumbers_iterators() {
+	const int		max_size = 20000;
+	std::list<int>	l;
+	Span			sp(max_size);
+
+	std::cout << "\n##### Test addNumbers() #####\n";
+	std::cout << "Creating a list with " << max_size << " elements\n";
+	for (int i = 0; i < max_size; i++) {
+		l.push_back(i);
+	}
+	std::cout << "Add " << max_size << " elements to a Span of size " <<
+		max_size << "\n";
+	sp.addNumbers(l.begin(), l.end());
+	std::cout << "shortestSpan() = " << sp.shortestSpan() << "\n";
+	std::cout << "longestSpan() = " << sp.longestSpan() << "\n";
+}
+
+void	test_addNumbers_iterators_limit() {
+	const int		max_size = 20000;
+	std::list<int>	l;
+	Span			sp(max_size);
+
+	std::cout << "\n##### Test addNumbers() limit #####\n";
+	std::cout << "Creating a list with " << max_size << " elements\n";
+	for (int i = 0; i < max_size; i++) {
+		l.push_back(i);
+	}
+	std::cout << "Add " << max_size << " elements to a Span of size " <<
+		max_size << "\n";
+	sp.addNumbers(l.begin(), l.end());
+	std::cout << "shortestSpan() = " << sp.shortestSpan() << "\n";
+	std::cout << "longestSpan() = " << sp.longestSpan() << "\n";
+	try {
+		std::cout << "Add one more element to Span\n";
+		sp.addNumber(42);
+	}
+	catch (const std::exception & e) {
+		std::cout << e.what() << "\n";
+	}
 }
 
 int main() {
@@ -146,4 +206,7 @@ int main() {
 	test_three_values(21, 0, 42);
 	test_five_values(21, 19, 0, 42, 1337);
 	test_add_combined();
+	test_addNumber_limit();
+	test_addNumbers_iterators();
+	test_addNumbers_iterators_limit();
 }
