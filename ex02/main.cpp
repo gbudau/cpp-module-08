@@ -134,19 +134,6 @@ void	test_with_other_underlying_container() {
 		std::cout << *it << "\n";
 		it++;
 	}
-
-	std::stack<int, std::vector<int> > stack_v = mstack_v;
-	MutantStack<int, std::vector<int> > mstack_copy(stack_v);
-
-	std::cout << "\nPrinting MutantStack<int, std::vector<int> > values\n";
-
-	it = mstack_copy.begin();
-	ite = mstack_copy.end();
-
-	while (it != ite) {
-		std::cout << *it << "\n";
-		it++;
-	}
 }
 
 int main() {
