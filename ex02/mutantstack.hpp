@@ -8,8 +8,6 @@ class MutantStack: public std::stack<T, Container> {
  public:
 	 MutantStack() {}
 	 MutantStack(const MutantStack & src) : std::stack<T, Container>(src) {}
-	 explicit MutantStack(const std::stack<T, Container> & src) :
-												std::stack<T, Container>(src) {}
 	 MutantStack &		operator=(const MutantStack &) {
 							return *this;
 	 					}
