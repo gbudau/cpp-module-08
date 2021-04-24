@@ -127,12 +127,22 @@ void	test_with_other_underlying_container() {
 	mstack_v.push(21);
 	mstack_v.push(19);
 
-	MutantStack<int, std::vector<int> >::iterator it = mstack_v.begin();
-	MutantStack<int, std::vector<int> >::iterator ite = mstack_v.end();
+	MutantStack<int, std::vector<int> >::const_iterator it = mstack_v.begin();
+	MutantStack<int, std::vector<int> >::const_iterator ite = mstack_v.end();
 
 	while (it != ite) {
 		std::cout << *it << "\n";
 		it++;
+	}
+
+	std::cout << "\nPrint reverse\n";
+
+	MutantStack<int, std::vector<int> >::const_reverse_iterator it_r = mstack_v.rbegin();
+	MutantStack<int, std::vector<int> >::const_reverse_iterator ite_r = mstack_v.rend();
+
+	while (it_r != ite_r) {
+		std::cout << *it_r << "\n";
+		it_r++;
 	}
 }
 
