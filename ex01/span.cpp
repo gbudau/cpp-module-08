@@ -56,7 +56,7 @@ unsigned int	Span::shortestSpan() const {
 	unsigned int shortest = std::numeric_limits<unsigned int>::max();
 	for (unsigned int i = 0; i < temp.size() - 1; i++) {
 		if (static_cast<unsigned int>(temp[i + 1] - temp[i]) < shortest) {
-			shortest = temp[i + 1] - temp[i];
+			shortest = static_cast<unsigned int>(temp[i + 1] - temp[i]);
 		}
 	}
 	return shortest;
@@ -69,5 +69,5 @@ unsigned int	Span::longestSpan() const {
 	}
 	std::vector<int>	temp = _data;
 	std::sort(temp.begin(), temp.end());
-	return temp.back() - temp.front();
+	return static_cast<unsigned int>(temp.back() - temp.front());
 }
