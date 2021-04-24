@@ -115,9 +115,44 @@ void	test_assign_operator() {
 	}
 }
 
+void	test_with_other_underlying_container() {
+	MutantStack<int, std::vector<int> > mstack_v;
+
+	std::cout <<
+	"\n##### Test MutantStack with std:vector as underlying container #####\n";
+	mstack_v.push(42);
+	std::cout << mstack_v.top() << "\n";
+	mstack_v.pop();
+	std::cout << "\n";
+	mstack_v.push(21);
+	mstack_v.push(19);
+
+	MutantStack<int, std::vector<int> >::iterator it = mstack_v.begin();
+	MutantStack<int, std::vector<int> >::iterator ite = mstack_v.end();
+
+	while (it != ite) {
+		std::cout << *it << "\n";
+		it++;
+	}
+
+	std::stack<int, std::vector<int> > stack_v = mstack_v;
+	MutantStack<int, std::vector<int> > mstack_copy(stack_v);
+
+	std::cout << "\nPrinting MutantStack<int, std::vector<int> > values\n";
+
+	it = mstack_copy.begin();
+	ite = mstack_copy.end();
+
+	while (it != ite) {
+		std::cout << *it << "\n";
+		it++;
+	}
+}
+
 int main() {
 	test_subject_mutantstack();
 	test_subject_list();
 	test_reverse_iterator();
 	test_assign_operator();
+	test_with_other_underlying_container();
 }
